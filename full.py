@@ -4,8 +4,8 @@ import time
 from unittest import result
 from pythainlp.util import isthai
 import numpy as np
-#from icevision import tfms
-#from icevision.models.checkpoint import model_from_checkpoint
+from icevision import tfms
+from icevision.models import model_from_checkpoint
 import easyocr as ocr  #OCR
 import editdistance
 
@@ -47,18 +47,11 @@ def img_resize(input_path,img_size): # padding
 
 checkpoint_path = "./ATK_result4_97.4.pth"
 
-def get_model_from_checkpoint():
-  from icevision.models.checkpoint import model_from_checkpoint
-  
- 
-  checkpoint_and_model = model_from_checkpoint(checkpoint_path, 
-      model_name='ross.efficientdet', 
-      backbone_name='tf_d2',
-      img_size=384, 
-      is_coco=False)
-  return checkpoint_and_model
-  
-checkpoint_and_model = get_model_from_checkpoint()
+checkpoint_and_model = model_from_checkpoint(checkpoint_path, 
+    model_name='ross.efficientdet', 
+    backbone_name='tf_d2',
+    img_size=384, 
+    is_coco=False)
 
 model_type = checkpoint_and_model["model_type"]
 backbone = checkpoint_and_model["backbone"]
@@ -71,12 +64,7 @@ model = checkpoint_and_model["model"]
 device=next(model.parameters()).device
 
 img_size = checkpoint_and_model["img_size"]
-
-def get_valid_tfms():
-  from icevision import tfms
-
-  valid_tfms = tfms.A.Adapter([*tfms.A.resize_and_pad(img_size), tfms.A.Normalize()])
-  return valid_tfms
+valid_tfms = tfms.A.Adapter([*tfms.A.resize_and_pad(img_size), tfms.A.Normalize()])
 
 def get_detection(img_path):
  
@@ -84,7 +72,6 @@ def get_detection(img_path):
   img = Image.open(img_path)
   img = ImageOps.exif_transpose(img) # fix image rotating
   width, height = img.size # get img_input size
-  valid_tfms = get_valid_tfms()
   if (width == 1280) and (height == 1280):
     pred_dict  = model_type.end2end_detect(img, valid_tfms, model, class_map=class_map, detection_threshold=0.6)
   else:
@@ -135,7 +122,6 @@ def get_img_detection(img_path):
     new_im.paste(img, ((1280-new_size[0])//2,
                         (1280-new_size[1])//2))
   
-  valid_tfms = get_valid_tfms()
   pred_dict  = model_type.end2end_detect(new_im, valid_tfms, model, class_map=class_map, detection_threshold=0.6)
 
 
