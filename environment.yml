@@ -5,6 +5,7 @@ channels:
 - conda-forge
 dependencies:
   - pip:
+    - numpy
     - streamlit
     - pythainlp
     - icevision
