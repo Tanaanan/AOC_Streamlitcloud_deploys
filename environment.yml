@@ -6,7 +6,7 @@ channels:
 dependencies:
   - pip:
     - streamlit
-    - numpy
+    - numpy==1.18.3
     - Pillow
     - pythainlp==3.0.8
     - icevision
