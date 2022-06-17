@@ -5,13 +5,14 @@ channels:
 - conda-forge
 dependencies:
   - pip:
-    - numpy
     - streamlit
-    - pythainlp
+    - numpy
+    - Pillow
+    - pythainlp==3.0.8
     - icevision
     - setuptools==59.5.0
     - mmcv
-    - easyocr
+    - easyocr==1.5.0
     - editdistance
 
 
