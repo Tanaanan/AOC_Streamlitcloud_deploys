@@ -2,7 +2,6 @@ import streamlit as st  #Web App
 from PIL import Image, ImageOps #Image Processing
 import time
 from unittest import result
-from pythainlp.util import isthai
 import numpy as np
 from icevision import tfms
 from icevision.models import model_from_checkpoint
@@ -165,22 +164,6 @@ def Get_Idcard_detail(file_path):
 
 
   raw_data = result_text  
-
-
-
-  def get_english(raw_list): # Cut only english var
-    eng_name = []
-    thai_name = []
-
-    for name in raw_list:
-      if isthai(name) == True:
-        thai_name.append(name)
-      else:
-        eng_name.append(name)
-
-    return eng_name
-
-  raw_data = get_english(raw_data)
 
 
   def Clear_syntax(raw_list):
