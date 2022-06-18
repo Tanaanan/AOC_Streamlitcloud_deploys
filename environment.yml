@@ -8,7 +8,6 @@ dependencies:
     - streamlit
     - numpy==1.18.3
     - Pillow
-    - pythainlp
     - icevision
     - setuptools==59.5.0
     - mmcv
