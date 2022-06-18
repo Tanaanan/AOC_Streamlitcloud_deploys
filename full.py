@@ -126,7 +126,6 @@ def get_img_detection(img_path):
 
   return pred_dict['img']
 
-@st.cache
 def load_model(): 
     reader = ocr.Reader(['en'],model_storage_directory='.')
     return reader 
