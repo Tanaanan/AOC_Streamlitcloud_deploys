@@ -3,7 +3,7 @@ from PIL import Image, ImageOps #Image Processing
 import time
 from unittest import result
 import numpy as np
-from icevision import tfms
+from icevision.all import *
 from icevision.models.checkpoint import *
 import easyocr as ocr  #OCR
 import editdistance
