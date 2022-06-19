@@ -4,7 +4,7 @@ import time
 from unittest import result
 import numpy as np
 from icevision import tfms
-from icevision.models import model_from_checkpoint
+from icevision.models.checkpoint import *
 import easyocr as ocr  #OCR
 import editdistance
 from setuptools import setup
